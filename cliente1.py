@@ -1,8 +1,21 @@
-import socket
-HOST="127.0.0.1"
-PORT="1234"
-with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as s:
-    s.connect((HOST,PORT))
-    s.sendall(b"Hola desde el cliente")
-    data=s.recv(1024)
-    print(f"Recibido{data!r}")
+from socket import *
+
+HOST = '172.17.37.152'
+PORT = 1236
+BUFSIZ = 1024
+ADDR = (HOST, PORT)
+
+tcpCliSock = socket(AF_INET, SOCK_STREAM)
+tcpCliSock.connect(ADDR)
+
+while True:
+    sdata = input('> ')
+    tcpCliSock.send(sdata.encode('utf-8'))
+    if not sdata:
+        break
+    tcpCliSock.send(sdata.encode())
+    rdata = tcpCliSock.recv(BUFSIZ).decode()
+    if not rdata:
+        break
+    print(rdata)
+tcpCliSock.close()
