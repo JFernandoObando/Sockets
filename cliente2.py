@@ -5,7 +5,7 @@ addr = ("172.17.37.152", 55857) # Conecta el programa del servidor con la ip y p
 
 #Enviar y recibir mensajes
 while True:
-    data = input("Ingresa tu nombre: ")
+    data = input("Ingresa tu nombre: " )
     if not data:
         continue 
     s_udp.sendto(data.encode(), addr) #envia el mensaje al servidor en bytes
