@@ -1,20 +1,27 @@
+#Importar el paquete socket
 from socket import *
 
-
+#Variable donde definimos la ip del servidor
+#dejar vacio para que cualquier cliente pueda conectarse
 HOST = ''
+#Definir el puerto de escucha del servidor
 PORT = 1234
+#Definir el buffer de cuantos bytes se va a transmitir los mensajes
 BUFSIZ = 1024
+#Variable donde se encuentra el host y el puerto
 ADDR = (HOST, PORT)
 
-tcpSerSock = socket(AF_INET, SOCK_STREAM)#Inicialización
+tcpSerSock = socket(AF_INET, SOCK_STREAM)#Inicialización del socket de tipo UDP
+#Asociar el socket con el host y el puerto
 tcpSerSock.bind(ADDR)
-tcpSerSock.listen()# Puerto de escucha
+# Activar el puerto de escucha
+tcpSerSock.listen()
 
-
+#Crear una comunicacion entre el servidor y el cliente
 while True:
-    print('witing for connection')#Esperando la conexión del cliente
+    print('Esperando la conexion del cliente')
     tcpCliSock, addr = tcpSerSock.accept()
-    print('connected from:{}'.format(addr))
+    print('Conectado desde:{}'.format(addr))
 
     while True:
         data = tcpCliSock.recv(BUFSIZ).decode()# Personajes aceptados
